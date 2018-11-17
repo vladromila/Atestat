@@ -1,26 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import PP from './PP.js';
+import Landing from './Landing.js';
+import { Nav, Navbar, MenuItem, NavItem, NavDropdown, FormGroup, FormControl, Button } from 'react-bootstrap'
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Router>
+        <React.Fragment>
+          <nav class="border fixed split-nav">
+  <div class="nav-brand">
+    <h3><a href="/1">Grafuri</a></h3>
+  </div>
+  <div class="collapsible">
+    <input id="collapsible1" type="checkbox" name="collapsible1"/>
+    <button>
+    <label for="collapsible1">
+        <div class="bar1"></div>
+        <div class="bar2"></div>
+        <div class="bar3"></div>
+      </label>
+    </button>
+    <div class="collapsible-body">
+      <ul class="inline">
+        <li><a href="#">Documentation</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Github</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+          <Route path="/" exact component={Landing} />
+          <Route path="/post/:handle" exact component={PP} /></React.Fragment>
+      </Router>
     );
   }
 }
