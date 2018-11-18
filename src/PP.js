@@ -1,11 +1,13 @@
 import React from 'react';
+import Spinner from 'react-spinkit';
 
 class PP extends React.Component {
     constructor() {
         super();
         this.state = {
             value: '',
-            res: { output: 'Nu a fost nimic compilat inca!' }
+            res: { output: 'Nu a fost nimic compilat inca!' },
+            loading:false
         }
     }
     onButtonClick = () => {
@@ -17,6 +19,7 @@ class PP extends React.Component {
             clientSecret: "9f0db5c8938a159a2a11dfb279ea32152c3a0ad715a2c201441a3b347f90fcb0",
             stdin:"5 5 2 1 2 5 1 3 2 4 5 1 4"
         }
+        this.setState({loading:true})
         fetch('https://cors-anywhere.herokuapp.com/https://api.jdoodle.com/v1/execute', {
             method: "POST",
             mode: "cors",
@@ -34,7 +37,7 @@ class PP extends React.Component {
             body: JSON.stringify(data)
         }
         ).then(res => res.json())
-            .then(res => this.setState({ res }))
+            .then(res => this.setState({ res:res,loading:false }))
     }
     render() {console.log(this.state.res.output)
         return (
@@ -61,12 +64,13 @@ class PP extends React.Component {
                 <textarea style={{ width: '100%' }} rows={15}
                 value={this.state.value}
                 onChange={(event) => this.setState({ value: event.target.value })}
+                disabled={this.state.loading}
                 ></textarea>
-                <div class="col-12 col">
-                    <button class="btn-block" onClick={this.onButtonClick}>Trimite</button>
+                <div class="col-12 col" style={{textAlign:'center',alignContent:'center',justifyContent:'center'}}>
+                    <button disabled={this.state.loading} class="btn-block" onClick={this.onButtonClick}>Trimite</button>
                 </div>
                 <h3 class="article-title"><a href="">Date de iesire</a></h3>
-                <div class="sm-3 col border border-primary">{this.state.res.output}</div>
+                <div class="sm-3 col border border-primary">{this.state.loading===false?this.state.res.output:<Spinner name="pacman" style={{alignSelf:'center'}} />}</div>
             </article>
         )
     }
