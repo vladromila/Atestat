@@ -11,7 +11,7 @@ class App extends Component {
         <React.Fragment>
           <nav class="border fixed split-nav">
   <div class="nav-brand">
-    <h3><a href="/1">Grafuri</a></h3>
+    <h3><Link to="/">Teoria Grafurilor</Link></h3>
   </div>
   <div class="collapsible">
     <input id="collapsible1" type="checkbox" name="collapsible1"/>
@@ -24,7 +24,7 @@ class App extends Component {
     </button>
     <div class="collapsible-body">
       <ul class="inline">
-        <li><a href="#">Documentation</a></li>
+        <li><Link to="/pb/1">Probleme</Link></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Github</a></li>
       </ul>
@@ -32,7 +32,7 @@ class App extends Component {
   </div>
 </nav>
           <Route path="/" exact component={Landing} />
-          <Route path="/post/:handle" exact component={PP} /></React.Fragment>
+          <Route path="/pb/:handle" exact component={PP} /></React.Fragment>
       </Router>
     );
   }

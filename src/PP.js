@@ -17,16 +17,20 @@ class PP extends React.Component {
             clientSecret: "9f0db5c8938a159a2a11dfb279ea32152c3a0ad715a2c201441a3b347f90fcb0",
             stdin:"5 5 2 1 2 5 1 3 2 4 5 1 4"
         }
-        fetch('https://api.jdoodle.com/v1/execute', {
-            method: "POST", // *GET, POST, PUT, DELETE, etc.
-            mode: "cors", // no-cors, cors, *same-origin
-            cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
-            credentials: "same-origin", // include, *same-origin, omit
+        fetch('https://cors-anywhere.herokuapp.com/https://api.jdoodle.com/v1/execute', {
+            method: "POST",
+            mode: "cors",
+            cache: "no-cache",
+            credentials: "same-origin",
             headers: {
-                "Content-Type": "application/json; charset=utf-8",
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Origin': '*',
+                'Access-Control-Allow-Headers': '*',
+                'Access-Control-Allow-Origin': '*',
             },
-            redirect: "follow", // manual, *follow, error
-            referrer: "no-referrer", // no-referrer, *client
+            redirect: "follow",
+            referrer: "no-referrer",
             body: JSON.stringify(data)
         }
         ).then(res => res.json())
