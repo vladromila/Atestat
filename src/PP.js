@@ -7,7 +7,7 @@ class PP extends React.Component {
         this.state = {
             value: '',
             res: { output: 'Nu a fost nimic compilat inca!' },
-            loading:false
+            loading: false
         }
     }
     onButtonClick = () => {
@@ -17,9 +17,9 @@ class PP extends React.Component {
             versionIndex: "3",
             clientId: "3ab058b2c56e83895ea733b3e0449bf5",
             clientSecret: "9f0db5c8938a159a2a11dfb279ea32152c3a0ad715a2c201441a3b347f90fcb0",
-            stdin:"5 5 2 1 2 5 1 3 2 4 5 1 4"
+            stdin: "5 5 2 1 2 5 1 3 2 4 5 1 4"
         }
-        this.setState({loading:true})
+        this.setState({ loading: true })
         fetch('https://cors-anywhere.herokuapp.com/https://api.jdoodle.com/v1/execute', {
             method: "POST",
             mode: "cors",
@@ -37,9 +37,9 @@ class PP extends React.Component {
             body: JSON.stringify(data)
         }
         ).then(res => res.json())
-            .then(res => this.setState({ res:res,loading:false }))
+            .then(res => this.setState({ res: res, loading: false }))
     }
-    render() {console.log(this.state.res.output)
+    render() {
         return (
             <article class="article" style={{ paddingTop: 20 }}>
                 <h1 class="article-title"><a href="">Facebook_FMI</a></h1>
@@ -61,16 +61,61 @@ class PP extends React.Component {
                     Fișierul de ieșire fb_fmi.out va conține pe prima linie numărul natural Q ce reprezintă numărul maxim de membrii ai submulțimii de utilizatori care au cel puțin k prieteni, aflați la rândul lor în submulțime.
     Pe următoarea linie, în ordine crescătoare, sunt enumerați utilizatori submulțimii. În cazul în care nu există o astfel de submulțime pentru k dat, în fișier se va scrie valoarea 0.
                 </p>
+                <h3 class="article-title"><a href="">Rezolvare</a></h3>
+                <pre><code>
+                    {`#include <fstream>
+using namespace std;
+ifstream fin("fb_fmi.in");
+ofstream fout("fb_fmi.out");
+int n,m,k,D[1005],nr;
+bool A[1005][1005],VIZ[1005];
+void citire()
+{
+    fin>>n>>m>>k;
+    int x,y,i;
+    for(i=1;i<=m;i++)
+    {
+        fin>>x>>y;
+        A[x][y]=A[y][x]=1;
+        D[x]++;
+        D[y]++;
+    }
+}
+void df(int x)
+{
+    VIZ[x]=1;
+    nr++;
+    for(int i=1;i<=n;i++)
+        if(A[x][i])
+    {
+        D[i]--;
+        if(D[i]<k&&VIZ[i]==0)
+            df(i);
+    }
+}
+int main()
+{
+    citire();
+    for(int i=1;i<=n;i++)
+        if(D[i]<k&&VIZ[i]==0)
+        df(i);
+    fout<<n-nr<<endl;
+    for(int i=1;i<=n;i++)
+        if(VIZ[i]==0)
+        fout<<i<<' ';
+    return 0;
+}`}
+                </code></pre>
                 <textarea style={{ width: '100%' }} rows={15}
-                value={this.state.value}
-                onChange={(event) => this.setState({ value: event.target.value })}
-                disabled={this.state.loading}
+                    value={this.state.value}
+                    onChange={(event) => this.setState({ value: event.target.value })}
+                    disabled={this.state.loading}
                 ></textarea>
-                <div class="col-12 col" style={{textAlign:'center',alignContent:'center',justifyContent:'center'}}>
+                <div class="col-12 col" style={{ textAlign: 'center', alignContent: 'center', justifyContent: 'center' }}>
                     <button disabled={this.state.loading} class="btn-block" onClick={this.onButtonClick}>Trimite</button>
                 </div>
                 <h3 class="article-title"><a href="">Date de iesire</a></h3>
-                <div class="sm-3 col border border-primary">{this.state.loading===false?this.state.res.output:<Spinner name="pacman" style={{alignSelf:'center'}} />}</div>
+                <div class="sm-3 col border border-primary">{this.state.loading === false ? this.state.res.output : <Spinner name="pacman" style={{ alignSelf: 'center' }} />}</div>
             </article>
         )
     }
