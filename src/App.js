@@ -27,8 +27,6 @@ class App extends Component {
     <div className="collapsible-body">
       <ul className="inline">
         <li><Link to="/pbs">Probleme</Link></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Github</a></li>
       </ul>
     </div>
   </div>
