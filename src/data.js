@@ -71,6 +71,62 @@ export const data = [
         `
     },
     {
+        title:'Graf neorientat conex',
+        description: 'Vlad Romila pe Facebook doreste sa afle daca un graf neorientat este conex.',
+        cerinta:'Sa se verifice daca graful neorientat dat este conex.',
+        din:'Se citeste de la tastatura un numar n=numar de noduri si un numar m=numar de muchii si m perechi de extremitati de muchii',
+        dout:'Sa se verifice daca graful dat este conex',
+        rezolvare:
+        `#include <bits/stdc++.h>
+
+        using namespace std;
+        ifstream fin("grafconex.in");
+        ofstream fout("grafconex.out");
+        int a[21][21],viz[120],gr[120],n,m,marc;
+        
+        void citire()
+        {
+            cin>>n>>m;
+            int x,y;
+            for(int i=1; i<=m; i++)
+            {
+                cin>>x>>y;
+                a[x][y]=a[y][x]=1;
+                gr[x]++;
+                gr[y]++;
+            }
+        
+        }
+        void df(int x)
+        {
+            viz[x]=marc;
+            for(int i=1; i<=n; i++)
+            {
+                if(i!=x&&viz[i]==0&&a[i][x]==1)
+                {
+                    df(i);
+                }
+            }
+        }
+        
+        int main()
+        {
+            citire();
+            for(int i=1; i<=n; i++)
+                if(viz[i]==0)
+                {
+                    marc++;
+                    df(i);
+                }
+            if(marc==1)
+                cout<<"Graful este conex";
+            else
+                cout<<"Graful nu este conex";
+            return 0;
+        }
+        `
+    },
+    {
         title: 'Componente T.C/Graf T.C',
         description: 'Vlad Romila pe Facebook doreste sa afle daca un graf este tare conex sau daca nu care sunt componentele tare conexe',
         cerinta: 'Sa se creeze un program care sa afiseze componentele tare conexe si daca graful dat este sau nu este tare conex (nu prea are sens cerinta dar nu imi bat capul)',
