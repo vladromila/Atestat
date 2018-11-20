@@ -41,81 +41,39 @@ class PP extends React.Component {
     }
     render() {
         return (
-            <article class="article" style={{ paddingTop: 20 }}>
-                <h1 class="article-title"><a href="">Facebook_FMI</a></h1>
-                <p class="article-meta">Scrisa de <a href="#">Vlad Romila</a></p>
-                <p class="text-lead">
-                    Ionuț tocmai a terminat liceul și susține examenul de admitere la facultate. Știind că s-a pregătit foarte bine pentru examen, el dorește să își anunțe reușita după examen printr-o postare pe Facebook.
-                    Ionuț cunoaște n utilizatori reprezentați de numerele de la 1 la n, între care există m relații de prietenie de forma i j, unde i și j sunt utilizatori, iar n și m sunt numere naturale nenule. Un utilizator nu poate fi prieten cu el însuși, iar o relație de prietenie între doi utilizatori ne spune că fiecare dintre ei este prieten cu celălalt.
-Întrucât dorește ca postarea lui să fie cât mai răspândită, Ionuț vrea să afle care sunt utilizatorii cei mai bine conectați din mulțimea sa de cunoscuți, pentru ca eventual să le ceară prietenia. Pentru aceasta, Ionuț trebuie să găsească cea mai mare submulțime de utilizatori cunoscuți, în care fiecare utilizator din această submulțime are cel puțin k prieteni aflați la rândul lor în submulțime, unde k este un număr natural nenul.</p>
-                <h3 class="article-title"><a href="">Cerinta</a></h3>
-                <p class="text-lead">
-                    Ajutați-l pe Ionuț să se determine și să se afișeze, printr-o soluție de complexitate timp cât mai bună, în funcție de datele de intrare, membrii celei mai mari submulțimi de utilizatori, cu proprietatea că fiecare utilizator din această submulțime are cel puțin k prieteni aflați la rândul lor în submulțime.
+            <article className="article" style={{ paddingTop: 20 }}>
+                <h1 className="article-title"><a href="">{this.props.location.state.title}</a></h1>
+                <p className="article-meta">Scrisa de <a href="https://www.facebook.com/vladromila">Vlad Romila</a></p>
+                <p className="text-lead">
+                {this.props.location.state.description}
                 </p>
-                <h3 class="article-title"><a href="">Date de intrare</a></h3>
-                <p class="text-lead">
-                    Fișierul de intrare fb_fmi.in conține pe prima linie numerele n, m și k, separate prin spațiu, iar pe a doua linie 2•m numere naturale cuprinse între 1 și n, separate prin spațiu, reprezentând în ordine cele m relații de prietenie între cei n utilizatori.
+                <h3 className="article-title"><a href="">Cerinta</a></h3>
+                <p className="text-lead">
+                   {this.props.location.state.cerinta}
                 </p>
-                <h3 class="article-title"><a href="">Date de iesire</a></h3>
-                <p class="text-lead">
-                    Fișierul de ieșire fb_fmi.out va conține pe prima linie numărul natural Q ce reprezintă numărul maxim de membrii ai submulțimii de utilizatori care au cel puțin k prieteni, aflați la rândul lor în submulțime.
-    Pe următoarea linie, în ordine crescătoare, sunt enumerați utilizatori submulțimii. În cazul în care nu există o astfel de submulțime pentru k dat, în fișier se va scrie valoarea 0.
+                <h3 className="article-title"><a href="">Date de intrare</a></h3>
+                <p className="text-lead">
+                   {this.props.location.state.din}
                 </p>
-                <h3 class="article-title"><a href="">Rezolvare</a></h3>
+                <h3 className="article-title"><a href="">Date de iesire</a></h3>
+                <p className="text-lead">
+                    {this.props.location.state.dout}
+                </p>
+                <h3 className="article-title"><a href="">Rezolvare</a></h3>
                 <pre><code>
-                    {`#include <fstream>
-using namespace std;
-ifstream fin("fb_fmi.in");
-ofstream fout("fb_fmi.out");
-int n,m,k,D[1005],nr;
-bool A[1005][1005],VIZ[1005];
-void citire()
-{
-    fin>>n>>m>>k;
-    int x,y,i;
-    for(i=1;i<=m;i++)
-    {
-        fin>>x>>y;
-        A[x][y]=A[y][x]=1;
-        D[x]++;
-        D[y]++;
-    }
-}
-void df(int x)
-{
-    VIZ[x]=1;
-    nr++;
-    for(int i=1;i<=n;i++)
-        if(A[x][i])
-    {
-        D[i]--;
-        if(D[i]<k&&VIZ[i]==0)
-            df(i);
-    }
-}
-int main()
-{
-    citire();
-    for(int i=1;i<=n;i++)
-        if(D[i]<k&&VIZ[i]==0)
-        df(i);
-    fout<<n-nr<<endl;
-    for(int i=1;i<=n;i++)
-        if(VIZ[i]==0)
-        fout<<i<<' ';
-    return 0;
-}`}
+                    {`${this.props.location.state.rezolvare}`}
                 </code></pre>
+                <h3 className="article-title"><a href="">Compilare(nu functioneaza cu fisiere, doar citire de la tastatura)</a></h3>
                 <textarea style={{ width: '100%' }} rows={15}
                     value={this.state.value}
                     onChange={(event) => this.setState({ value: event.target.value })}
                     disabled={this.state.loading}
                 ></textarea>
-                <div class="col-12 col" style={{ textAlign: 'center', alignContent: 'center', justifyContent: 'center' }}>
-                    <button disabled={this.state.loading} class="btn-block" onClick={this.onButtonClick}>Trimite</button>
+                <div className="col-12 col" style={{ textAlign: 'center', alignContent: 'center', justifyContent: 'center' }}>
+                    <button disabled={this.state.loading} className="btn-block" onClick={this.onButtonClick}>Trimite</button>
                 </div>
-                <h3 class="article-title"><a href="">Date de iesire</a></h3>
-                <div class="sm-3 col border border-primary">{this.state.loading === false ? this.state.res.output : <Spinner name="pacman" style={{ alignSelf: 'center' }} />}</div>
+                <h3 className="article-title"><a href="">Date de iesire</a></h3>
+                <div className="sm-3 col border border-primary">{this.state.loading === false ? this.state.res.output : <Spinner name="pacman" style={{ alignSelf: 'center' }} />}</div>
             </article>
         )
     }

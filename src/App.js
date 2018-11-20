@@ -2,29 +2,31 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import PP from './PP.js';
 import Landing from './Landing.js';
+import List from './List.js';
 import { Nav, Navbar, MenuItem, NavItem, NavDropdown, FormGroup, FormControl, Button } from 'react-bootstrap'
+import {data} from './data.js';
 
 class App extends Component {
-  render() {
+  render() {console.log(data);
     return (
       <Router>
         <React.Fragment>
-          <nav class="border fixed split-nav">
-  <div class="nav-brand">
+          <nav className="border fixed split-nav">
+  <div className="nav-brand">
     <h3><Link to="/">Teoria Grafurilor</Link></h3>
   </div>
-  <div class="collapsible">
+  <div className="collapsible">
     <input id="collapsible1" type="checkbox" name="collapsible1"/>
     <button>
-    <label for="collapsible1">
-        <div class="bar1"></div>
-        <div class="bar2"></div>
-        <div class="bar3"></div>
+    <label htmlFor="collapsible1">
+        <div className="bar1"></div>
+        <div className="bar2"></div>
+        <div className="bar3"></div>
       </label>
     </button>
-    <div class="collapsible-body">
-      <ul class="inline">
-        <li><Link to="/pb/1">Probleme</Link></li>
+    <div className="collapsible-body">
+      <ul className="inline">
+        <li><Link to="/pbs">Probleme</Link></li>
         <li><a href="#">About</a></li>
         <li><a href="#">Github</a></li>
       </ul>
@@ -32,7 +34,10 @@ class App extends Component {
   </div>
 </nav>
           <Route path="/" exact component={Landing} />
-          <Route path="/pb/:handle" exact component={PP} /></React.Fragment>
+          <Route path="/pbs" exact component={List} />
+          <Route path="/pb" exact component={PP} />
+          </React.Fragment>
+          
       </Router>
     );
   }
