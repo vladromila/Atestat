@@ -71,6 +71,61 @@ export const data = [
         `
     },
     {
+        title:'Afisarea lanturilor unui graf neorientat',
+        cerinta:'Sa se afiseze lanturile unui graf neorientat',
+        din:'Se citeste de la tastatura un numar n=numar de noduri si un numar m=numar de muchii si m perechi de extremitati de muchii',
+        dout:'Sa se afiseze lanturile grafului neorientat dat',
+        rezolvare:
+        `#include <bits/stdc++.h>
+
+        using namespace std;
+        ifstream fin("date.in");
+        ofstream fout("date.out");
+        int a[120][120],n,m,viz[120];
+        void citire()
+        {
+            fin>>n>>m;
+            int x,y;
+            for(int i=1; i<=m; i++)
+            {
+                fin>>x>>y;
+                a[x][y]=a[y][x]=1;
+            }
+        }
+        void rw(int a[120][120])
+        {
+            for(int i=1; i<=n; i++)
+                for(int j=1; j<=n; j++)
+                    for(int k=1; k<=n; k++)
+                        if(i!=k&&j!=k&&j!=i&&a[i][j]==0)
+                        {
+                            a[i][j]=a[i][k]*a[k][j];
+                        }
+        }
+        int main()
+        {
+            citire();
+            rw(a);
+            for(int i=1;i<=n;i++)
+            {
+                if(viz[i]==0)
+                { viz[i]=1;
+                    fout<<i<<" ";
+                    for(int j=1;j<=n;j++)
+                    {
+                        if(a[i][j]==1)
+                        {
+                            fout<<j<<" ";
+                            viz[j]=1;
+                        }
+                    }
+                    fout<<endl;
+                }
+            }
+        }        
+        `
+    },
+    {
         title:'Graf neorientat conex',
         description: 'Vlad Romila pe Facebook doreste sa afle daca un graf neorientat este conex.',
         cerinta:'Sa se verifice daca graful neorientat dat este conex.',
