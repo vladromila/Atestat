@@ -8,7 +8,7 @@ const Landing = () => {
     return (
         <div style={{ width: '100%', height: '100%', textAlign: 'center' }}>
 
-            <AnchorLink href='#things'><img width="5%" src={img} style={{
+            <AnchorLink href='#things'><img width="50px" src={img} style={{
                 scale: 0,
                 position: 'absolute',
                 top: '90%',
