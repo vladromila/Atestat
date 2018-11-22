@@ -1,23 +1,21 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import {data} from './data.js'
-class List extends React.Component
-{
-    constructor()
-    {
+import { Link } from 'react-router-dom';
+import { data } from './data.js'
+class List extends React.Component {
+    constructor() {
         super();
-        this.state={
+        this.state = {
         }
     }
-    render()
-    {
-        return(
-            <div class="col-12 col" style={{marginTop:80}}>
-            {data.map((obj,i)=>{
-                return<Link key={i} to={{ pathname: '/pb', state: obj }}><button style={{marginTop:2}}  class="btn-block">{obj.title}</button></Link>
-            })}
+    render() {
+        return (
+            <div class="col-12 col" style={{ marginTop: 80 }}>
+                <button style={{ marginTop: 2 }} class="btn-block"><a href="http://liis.ro/~infosuport/12/grafuri.pdf">PENTRU TEORIE!</a></button>
+                {data.map((obj, i) => {
+                    return <Link key={i} to={{ pathname: '/pb', state: obj }}><button style={{ marginTop: 2 }} class="btn-block">{obj.title}</button></Link>
+                })}
             </div>
-            
+
         )
     }
 }
