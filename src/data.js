@@ -182,6 +182,57 @@ export const data = [
         `
     },
     {
+        title:'Graf neorientat conex cu BF',
+        description: 'Vlad Romila pe Facebook doreste sa afle daca un graf neorientat este conex.',
+        cerinta:'Sa se verifice daca graful neorientat dat este conex.',
+        din:'Se citeste de la tastatura un numar n=numar de noduri si un numar m=numar de muchii si m perechi de extremitati de muchii',
+        dout:'Sa se verifice daca graful dat este conex',
+        rezolvare:
+        `#include<fstream>
+        using namespace std;
+        ifstream fin("date.in");
+        ofstream fout("date.out");
+        int a[101][101],viz[101],c[101],x,y,n,ok=1;
+        
+        void Bf(int x)
+        {
+            int p=1;
+            int u=1;
+            int z;
+            c[1]=x;
+            viz[x]=1;
+            while(p<=u)
+            {
+                z=c[p];
+                p++;
+        
+                for(int i=1; i<=n; i++)
+                    if(a[z][i]==1&& viz[i]==0)
+                    {
+                        u++;
+                        c[u]=i;
+                        viz[i]=1;
+                    }
+            }
+        
+        }
+        int main()
+        {
+            fin>>n;
+            while(fin>>x>>y)
+                a[x][y]=a[y][x]=1;
+            Bf(1);
+            for(int i=1;i<=n;i++)
+        if(viz[i]==0)
+        ok=0;
+        
+        if (ok)
+            fout<<"conex";
+        if(ok==0) fout<<" nu e conex";
+        }        
+        `
+    },
+    {
         title:'Graf neorientat eulerian',
         description: 'Vlad Romila pe Facebook doreste sa afle daca un graf neorientat este eulerian.',
         cerinta:'Sa se verifice daca graful neorientat dat este eulerian.',
