@@ -306,6 +306,56 @@ export const data = [
         `
     },
     {
+        title: 'ROY FLOYD',
+        description: 'Vlad Romila pe Facebook doreste sa afle costul minim de la orice nod la altul',
+        cerinta: 'Sa se creeze un program care sa afiseze matricea de costuri',
+        din: 'Se citeste din fisierul n,m si m arce ale unui graf cu costurile lor',
+        dout: 'Sa se afiseze matricea de costuri a grafului dat',
+        rezolvare:
+        `#include <bits/stdc++.h>
+        using namespace std;
+        ifstream fin("rf.in");
+        ofstream fout("rf.out");
+        int a[101][101],d[101][101],n,m;
+        void citire();
+        int main()
+        {
+            fin>>n>>m;
+            for(int i=1; i<=n; i++)
+                for(int j=1; j<=n; j++)
+                    d[i][j] = 999999;
+            citire();
+            for(int k=1; k<=n; k++)
+                for(int i=1; i<=n; i++)
+                    for(int j=1; j<=n; j++)
+                        if(d[i][j]>d[i][k]+d[k][j] && (d[i][k]+d[k][j]!=0))
+                            d[i][j] = d[i][k]+d[k][j];
+            for(int i=1; i<=n; i++)
+            {
+                for(int j=1; j<=n; j++)
+                    if(i==j)
+                        fout<<0<<" ";
+                    else if(d[i][j] == 999999)
+                        fout<<-1<<" ";
+                    else
+                        fout<<d[i][j]<<" ";
+                fout<<endl;
+            }
+            return 0;
+        }
+        
+        void citire()
+        {
+            int x,y,c;
+            for(int i=1; i<=m; i++)
+            {
+                fin>>x>>y>>c;
+                a[x][y] = d[x][y] = c;
+            }
+        }        
+        `
+    },
+    {
         title: 'Componente T.C/Graf T.C',
         description: 'Vlad Romila pe Facebook doreste sa afle daca un graf este tare conex sau daca nu care sunt componentele tare conexe',
         cerinta: 'Sa se creeze un program care sa afiseze componentele tare conexe si daca graful dat este sau nu este tare conex (nu prea are sens cerinta dar nu imi bat capul)',
