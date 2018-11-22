@@ -10,7 +10,7 @@ class List extends React.Component {
     render() {
         return (
             <div class="col-12 col" style={{ marginTop: 80 }}>
-                <button style={{ marginTop: 2 }} class="btn-block"><a href="http://liis.ro/~infosuport/12/grafuri.pdf">PENTRU TEORIE!</a></button>
+                <a href="http://liis.ro/~infosuport/12/grafuri.pdf"><button style={{ marginTop: 2 }} class="btn-block">PENTRU TEORIE!</button></a>
                 {data.map((obj, i) => {
                     return <Link key={i} to={{ pathname: '/pb', state: obj }}><button style={{ marginTop: 2 }} class="btn-block">{obj.title}</button></Link>
                 })}
