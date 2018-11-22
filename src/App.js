@@ -3,11 +3,8 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import PP from './PP.js';
 import Landing from './Landing.js';
 import List from './List.js';
-import { Nav, Navbar, MenuItem, NavItem, NavDropdown, FormGroup, FormControl, Button } from 'react-bootstrap'
-import {data} from './data.js';
-
 class App extends Component {
-  render() {console.log(data);
+  render() {
     return (
       <Router>
         <React.Fragment>
@@ -31,9 +28,9 @@ class App extends Component {
     </div>
   </div>
 </nav>
-          <Route path="atestat/" exact component={Landing} />
-          <Route path="atestat/pbs" exact component={List} />
-          <Route path="atestat/pb" exact component={PP} />
+          <Route path="/" exact component={Landing} />
+          <Route path="/pbs" exact component={List} />
+          <Route path="/pb/:handle" exact component={PP} />
           </React.Fragment>
           
       </Router>

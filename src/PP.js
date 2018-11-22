@@ -1,12 +1,14 @@
 import React from 'react';
 import Spinner from 'react-spinkit';
+import { data } from './data';
 
 class PP extends React.Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             value: '',
             res: { output: 'Nu a fost nimic compilat inca!' },
+            problem: data[this.props.match.params.handle]||{},
             loading: false
         }
     }
@@ -41,40 +43,42 @@ class PP extends React.Component {
     }
     render() {
         return (
-            <article className="article" style={{ paddingTop: 20 }}>
-                <h1 className="article-title"><a href="">{this.props.location.state.title}</a></h1>
-                <p className="article-meta">Scrisa de <a href="https://www.facebook.com/vladromila">Vlad Romila</a></p>
-                <p className="text-lead">
-                {this.props.location.state.description}
-                </p>
-                <h3 className="article-title"><a href="">Cerinta</a></h3>
-                <p className="text-lead">
-                   {this.props.location.state.cerinta}
-                </p>
-                <h3 className="article-title"><a href="">Date de intrare</a></h3>
-                <p className="text-lead">
-                   {this.props.location.state.din}
-                </p>
-                <h3 className="article-title"><a href="">Date de iesire</a></h3>
-                <p className="text-lead">
-                    {this.props.location.state.dout}
-                </p>
-                <h3 className="article-title"><a href="">Rezolvare</a></h3>
-                <pre><code>
-                    {`${this.props.location.state.rezolvare}`}
-                </code></pre>
-                <h3 className="article-title"><a href="">Compilare(nu functioneaza cu fisiere, doar citire de la tastatura)</a></h3>
-                <textarea style={{ width: '100%' }} rows={15}
-                    value={this.state.value}
-                    onChange={(event) => this.setState({ value: event.target.value })}
-                    disabled={this.state.loading}
-                ></textarea>
-                <div className="col-12 col" style={{ textAlign: 'center', alignContent: 'center', justifyContent: 'center' }}>
-                    <button disabled={this.state.loading} className="btn-block" onClick={this.onButtonClick}>Trimite</button>
-                </div>
-                <h3 className="article-title"><a href="">Date de iesire</a></h3>
-                <div className="sm-3 col border border-primary">{this.state.loading === false ? this.state.res.output : <Spinner name="pacman" style={{ alignSelf: 'center' }} />}</div>
-            </article>
+            <React.Fragment>
+                {this.state.problem.title !== undefined ?
+                    <article className="article" style={{ paddingTop: 20 }}>
+                        <h1 className="article-title" style={{ textDecoration: true }}>{this.state.problem.title}</h1>
+                        <p className="text-lead">
+                            {this.state.problem.description}
+                        </p>
+                        <h3 className="article-title">Cerinta</h3>
+                        <p className="text-lead">
+                            {this.state.problem.cerinta}
+                        </p>
+                        <h3 className="article-title">Date de intrare</h3>
+                        <p className="text-lead">
+                            {this.state.problem.din}
+                        </p>
+                        <h3 className="article-title">Date de iesire</h3>
+                        <p className="text-lead">
+                            {this.state.problem.dout}
+                        </p>
+                        <h3 className="article-title">Rezolvare</h3>
+                        <pre><code>
+                            {`${this.state.problem.rezolvare}`}
+                        </code></pre>
+                        <h3 className="article-title">Compilare(nu functioneaza cu fisiere, doar citire de la tastatura)</h3>
+                        <textarea style={{ width: '100%' }} rows={15}
+                            value={this.state.value}
+                            onChange={(event) => this.setState({ value: event.target.value })}
+                            disabled={this.state.loading}
+                        ></textarea>
+                        <div className="col-12 col" style={{ textAlign: 'center', alignContent: 'center', justifyContent: 'center' }}>
+                            <button disabled={this.state.loading} className="btn-block" onClick={this.onButtonClick}>Trimite</button>
+                        </div>
+                        <h3 className="article-title">Date de iesire</h3>
+                        <div className="sm-3 col border border-primary">{this.state.loading === false ? this.state.res.output : <Spinner name="pacman" style={{ alignSelf: 'center' }} />}</div>
+                    </article> : <article className="article" style={{ paddingTop: 20 }}>
+                        <h1 className="article-title" style={{ textDecoration: true }}>Linkul accesat nu este valabil</h1> </article>}</React.Fragment>
         )
     }
 }

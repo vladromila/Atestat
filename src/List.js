@@ -9,10 +9,10 @@ class List extends React.Component {
     }
     render() {
         return (
-            <div class="col-12 col" style={{ marginTop: 80 }}>
-                <a href="http://liis.ro/~infosuport/12/grafuri.pdf"><button style={{ marginTop: 2 }} class="btn-block">PENTRU TEORIE!</button></a>
+            <div className="col-12 col" style={{ marginTop: 80 }}>
+                <a href="http://liis.ro/~infosuport/12/grafuri.pdf"><button style={{ marginTop: 2 }} className="btn-block">PENTRU TEORIE!</button></a>
                 {data.map((obj, i) => {
-                    return <Link key={i} to={{ pathname: '/pb', state: obj }}><button style={{ marginTop: 2 }} class="btn-block">{obj.title}</button></Link>
+                    return <Link key={i} to={{ pathname: `pb/${i}`, state: obj }}><button style={{ marginTop: 2 }} className="btn-block">{obj.title}</button></Link>
                 })}
             </div>
 
