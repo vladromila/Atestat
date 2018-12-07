@@ -42,9 +42,9 @@ class App extends Component {
     </div>
   </div>
 </nav>
-          <Route path="/Atestat/" exact component={Landing} />
-          <Route path="/Atestat/pbs" exact component={List} />
-          <Route path="/Atestat/pb/:handle" exact component={PP} />
+          <Route path="/" exact component={Landing} />
+          <Route path="/pbs" exact component={List} />
+          <Route path="/pb/:handle" exact component={PP} />
           </React.Fragment>
           
       </Router>
