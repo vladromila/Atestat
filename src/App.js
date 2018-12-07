@@ -3,7 +3,21 @@ import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 import PP from './PP.js';
 import Landing from './Landing.js';
 import List from './List.js';
+import firebase from 'firebase'
 class App extends Component {
+  componentWillMount()
+    {
+        var config = {
+            apiKey: "AIzaSyBTYNMtBo3qAWaZngld95uW40dlHCCNoZE",
+            authDomain: "atestatpareri.firebaseapp.com",
+            databaseURL: "https://atestatpareri.firebaseio.com",
+            projectId: "atestatpareri",
+            storageBucket: "",
+            messagingSenderId: "773986191427"
+          };
+          firebase.initializeApp(config);
+          firebase.auth().signInAnonymously();
+    }
   render() {
     return (
       <Router>
@@ -28,9 +42,9 @@ class App extends Component {
     </div>
   </div>
 </nav>
-          <Route path="/" exact component={Landing} />
-          <Route path="/pbs" exact component={List} />
-          <Route path="/pb/:handle" exact component={PP} />
+          <Route path="/Atestat/" exact component={Landing} />
+          <Route path="/Atestat/pbs" exact component={List} />
+          <Route path="/Atestat/pb/:handle" exact component={PP} />
           </React.Fragment>
           
       </Router>

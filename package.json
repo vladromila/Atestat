@@ -4,6 +4,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "firebase": "^5.5.9",
     "papercss": "^1.6.0",
     "react": "^16.6.3",
     "react-anchor-link-smooth-scroll": "^1.0.11",

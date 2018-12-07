@@ -45,7 +45,7 @@ class PP extends React.Component {
         return (
             <React.Fragment>
                 {this.state.problem.title !== undefined ?
-                    <article className="article" style={{ paddingTop: 20 }}>
+                    <article className="col-9 col center" style={{ paddingTop: 20 }}>
                         <h1 className="article-title" style={{ textDecoration: true }}>{this.state.problem.title}</h1>
                         <p className="text-lead">
                             {this.state.problem.description}
